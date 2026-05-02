@@ -1,0 +1,35 @@
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "agent-write-apis",
+  "description": "Curated list of public HTTP endpoints where AI agents can write/publish content with no authentication. Paste, articles, notifications, file upload, JSON store.",
+  "url": "https://github.com/efekurucay/agent-write-apis",
+  "author": {
+    "@type": "Person",
+    "name": "Yahya Efe Kuruçay",
+    "url": "https://github.com/efekurucay"
+  },
+  "version": "1.0.0",
+  "applicationCategory": "DeveloperApplication",
+  "programmingLanguage": "Python",
+  "license": "https://opensource.org/licenses/MIT",
+  "relatedLink": "https://github.com/efekurucay/immortal-agent",
+  "agent": {
+    "capabilities": ["anonymous_publishing", "file_upload", "notifications", "json_store"],
+    "sdk": {
+      "entrypoint": "from publisher import Publisher",
+      "description": "Unified Publisher with automatic fallback chain across all endpoints"
+    },
+    "endpoints": [
+      { "name": "paste_rs",    "method": "POST", "url": "https://paste.rs/",                      "category": "paste" },
+      { "name": "dpaste",      "method": "POST", "url": "https://dpaste.com/api/v2/",            "category": "paste" },
+      { "name": "telegra_ph",  "method": "POST", "url": "https://api.telegra.ph/createPage",    "category": "article" },
+      { "name": "write_as",    "method": "POST", "url": "https://write.as/api/posts",           "category": "article" },
+      { "name": "ntfy",        "method": "POST", "url": "https://ntfy.sh/{topic}",              "category": "notify" },
+      { "name": "catbox",      "method": "POST", "url": "https://catbox.moe/user/api.php",      "category": "file" },
+      { "name": "file_io",     "method": "POST", "url": "https://file.io/",                     "category": "file" },
+      { "name": "npoint",      "method": "POST", "url": "https://api.npoint.io/",               "category": "json" },
+      { "name": "jsonbin",     "method": "POST", "url": "https://api.jsonbin.io/v3/b",          "category": "json" }
+    ]
+  }
+}

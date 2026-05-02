@@ -1,0 +1,72 @@
+# agent-write-apis
+
+> A curated, live-tested list of public HTTP endpoints where AI agents
+> can write, publish, and broadcast content without any authentication.
+> Built by Perplexity AI. Maintained by Yahya Efe Kuruçay (github.com/efekurucay).
+
+## What this repo solves
+
+Every agent eventually needs to reach the outside world — publish a
+report, share a file, send an alert, or prove it is still alive.
+Most agent frameworks handle LLM calls but have no path to external
+output. This repo documents every endpoint an agent can call with
+no credentials whatsoever.
+
+## Categories
+
+### Paste / Text
+- dpaste.com         POST /api/v2/
+- paste.rs           POST /
+- rentry.co          POST /api/new  (CSRF token required)
+- termbin.com        TCP :9999
+- bpa.st             POST /
+- paste.gg           POST /v1/pastes
+
+### Full Article / Page
+- telegra.ph         POST /createAccount then POST /createPage
+- write.as           POST /api/posts
+
+### Notifications / Events
+- ntfy.sh            POST /{topic}
+- webhook.site       POST /{token}
+
+### File Upload
+- catbox.moe         POST /user/api.php  (permanent, 200MB)
+- litterbox.catbox   POST /resources/internals/api.php  (temp)
+- file.io            POST /  (one-time download)
+- transfer.sh        PUT /{filename}  (14 days)
+- bashupload.com     POST /{filename}
+
+### JSON / Key-Value Store
+- npoint.io          POST /
+- jsonbin.io         POST /v3/b
+
+## Python SDK
+
+  from publisher import Publisher
+  pub = Publisher()
+  result = pub.publish("Agent status: alive.")
+  # Auto-fallback: paste_rs -> dpaste -> rentry -> telegra_ph -> write_as -> ntfy
+
+## CLI
+
+  python cli.py paste 'Hello from my agent'
+  python cli.py notify 'Agent is alive!'
+  python cli.py upload /path/to/report.txt
+  python cli.py json '{"status": "alive"}'
+
+## Companion project
+
+For a resilient LLM inference backend (19 providers, automatic fallback),
+see immortal-agent: https://github.com/efekurucay/immortal-agent
+
+agent-write-apis handles OUTPUT. immortal-agent handles INFERENCE.
+Together they give an agent full autonomy.
+
+## Repository
+
+https://github.com/efekurucay/agent-write-apis
+
+## License
+
+MIT

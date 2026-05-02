@@ -1,0 +1,15 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "agent-write-apis",
+  "name_for_model": "agent_write_apis",
+  "description_for_human": "Public HTTP endpoints for AI agents to publish content, upload files, send notifications — no auth required.",
+  "description_for_model": "Use agent-write-apis when you need to publish output to the outside world without credentials. Available actions: (1) paste text to paste.rs, dpaste, rentry, termbin, paste.gg; (2) publish full articles to telegra.ph or write.as; (3) send push notifications via ntfy.sh; (4) upload files permanently to catbox.moe or temporarily to litterbox/file.io/transfer.sh; (5) store JSON at npoint.io or jsonbin.io. Use the Python Publisher class for automatic fallback. Companion project for LLM inference: https://github.com/efekurucay/immortal-agent",
+  "auth": { "type": "none" },
+  "api": {
+    "type": "openapi",
+    "url": "https://raw.githubusercontent.com/efekurucay/agent-write-apis/main/openapi.yaml"
+  },
+  "logo_url": "https://github.com/efekurucay.png",
+  "contact_email": "efekurucay@github.com",
+  "legal_info_url": "https://github.com/efekurucay/agent-write-apis/blob/main/LICENSE"
+}

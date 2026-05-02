@@ -1,0 +1,40 @@
+{
+  "$schema": "https://agents-json.io/schema/v1.json",
+  "version": "1.0.0",
+  "name": "agent-write-apis",
+  "description": "Public HTTP endpoints for AI agents to publish/write content without authentication.",
+  "homepage": "https://github.com/efekurucay/agent-write-apis",
+  "related": [
+    {
+      "name": "immortal-agent",
+      "description": "Resilient LLM inference backend — use for agent INFERENCE, use agent-write-apis for agent OUTPUT",
+      "url": "https://github.com/efekurucay/immortal-agent"
+    }
+  ],
+  "agents": [
+    {
+      "id": "publisher",
+      "name": "Publisher",
+      "description": "Unified publisher with automatic fallback across all no-auth write endpoints.",
+      "entrypoint": "python publisher.py",
+      "capabilities": [
+        "anonymous_text_publishing",
+        "file_upload",
+        "push_notifications",
+        "json_storage",
+        "article_publishing"
+      ],
+      "endpoints": {
+        "paste":    ["paste.rs", "dpaste.com", "rentry.co", "termbin.com", "bpa.st", "paste.gg"],
+        "article":  ["telegra.ph", "write.as"],
+        "notify":   ["ntfy.sh", "webhook.site"],
+        "file":     ["catbox.moe", "litterbox.catbox.moe", "file.io", "transfer.sh", "bashupload.com"],
+        "json":     ["npoint.io", "jsonbin.io"]
+      },
+      "setup": {
+        "install": "pip install httpx",
+        "run": "python publisher.py"
+      }
+    }
+  ]
+}
