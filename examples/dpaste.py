@@ -1,22 +1,39 @@
-"""dpaste.com — no auth required."""
+"""dpaste.com — simple paste, no auth required.
+
+API docs: https://dpaste.com/api/v2/
+Returns: URL of the created paste (HTTP 201)
+"""
 import httpx
 
-def publish(content: str, title: str = "agent-output", expiry_days: int = 365) -> str:
-    """Publish text to dpaste.com. Returns public URL."""
+
+def publish_dpaste(content: str, syntax: str = "text", expiry_days: int = 365) -> str | None:
+    """Publish content to dpaste.com.
+
+    Args:
+        content:     Text content to paste.
+        syntax:      Syntax highlighting (text, python, javascript, etc.)
+        expiry_days: Days until expiry (1-365, or 0 = never on some plans)
+
+    Returns:
+        Public URL string, or None on failure.
+    """
     r = httpx.post(
         "https://dpaste.com/api/v2/",
         data={
-            "content": content,
-            "syntax": "text",
+            "content":     content,
+            "syntax":      syntax,
             "expiry_days": expiry_days,
-            "title": title,
         },
         timeout=10,
     )
-    r.raise_for_status()
-    return r.text.strip()
+    if r.status_code == 201:
+        return r.text.strip()
+    return None
 
 
 if __name__ == "__main__":
-    url = publish("Hello from an AI agent!", title="test")
-    print(f"Published: {url}")
+    url = publish_dpaste(
+        "# Hello from an AI agent\n\nThis was published without any API key.",
+        syntax="markdown",
+    )
+    print(f"Published: {url}" if url else "Failed.")
